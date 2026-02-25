@@ -23,7 +23,7 @@ Dette designet sikrer:
 
 Datasettet deles i:
 
-- Treningssett (første ~80 % av observasjonene)
+- Treningssett (første ca. 80 % av observasjonene)
 - Testsett (siste ~20 %)
 
 Splittingen gjøres kronologisk, ikke tilfeldig, for å ivareta tidsserieegenskaper.
@@ -37,10 +37,10 @@ Testsettet representerer fremtidige observasjoner som modellen ikke har sett und
 To evalueringsstrategier vurderes:
 
 1. Statisk prognose:
-	Modellen trenes én gang og evalueres på hele testperioden.
+  Modellen trenes én gang og evalueres på hele testperioden.
 
 2. Rullerende prognose:
-	Modellen oppdateres fortløpende etter hvert som nye observasjoner blir tilgjengelige.
+  Modellen oppdateres fortløpende etter hvert som nye observasjoner blir tilgjengelige.
 
 Endelig valg dokumenteres og begrunnes før implementering.
 
@@ -57,6 +57,8 @@ Prognosepresisjon måles ved hjelp av standard feilmål for tidsserier:
 MAE gir et direkte mål på gjennomsnittlig avvik i volum.
 RMSE straffer store feil sterkere og gir innsikt i modellens stabilitet.
 MAPE vurderes dersom volumene ikke inneholder nullverdier.
+
+Primært vil MAE benyttes som hovedmetrisk for sammenligningen, mens RMSE og eventuelt MAPE brukes som supplerende mål.
 
 ---
 
