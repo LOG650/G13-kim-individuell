@@ -1,0 +1,41 @@
+# LOG650 - Terminal Workflow Card
+
+Dette dokumentet gir en rask oversikt over de vanligste Git-kommandoene som brukes i kurset.
+
+## 1. Start hver arbeidsøkt
+Før du begynner å jobbe, bør du alltid sjekke status og hente ned siste endringer.
+* `git status`
+* `git pull`
+
+## 2. Lagre arbeid
+Når du er ferdig med en oppgave, må endringene legges til, committes og pushes.
+* `git add .`
+* `git commit -m "Beskrivende melding"`
+* `git push`
+
+## 3. Bytte branch
+Slik navigerer du mellom ulike grener i prosjektet.
+* `git branch` (viser oversikt over brancher)
+* `git checkout main`
+* `git checkout feature/proposal`
+
+## 4. Lage ny branch
+Bruk denne kommandoen for å opprette en ny arbeidsgren og bytte til den med en gang.
+* `git checkout -b feature/analyse`
+
+## 5. Merge til main
+Når arbeidet i en branch er ferdig, skal det flettes inn i hovedgrenen.
+* `git checkout main`
+* `git pull`
+* `git merge feature/proposal`
+* `git push`
+
+## 6. Rette feil
+Hvis du trenger å angre endringer eller fjerne filer fra "staging area".
+* `git restore filnavn`
+* `git restore`
+* `git restore --staged filnavn`
+
+## 7. Se historikk
+For en rask oversikt over tidligere commits.
+* `git log --oneline`
