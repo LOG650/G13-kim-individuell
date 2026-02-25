@@ -10,26 +10,26 @@
 
 Etterspørselsprognoser innen kvantitativ logistikk.
 
-Prosjektet tilhører området Etterspørselsprognoser slik det er definert i kompendiet for emnet. Fokuset er prediksjon av fremtidig volum basert på historiske data, med anvendelse i operativ planlegging.
+Prosjektet tilhører området Etterspørselsprognoser slik det er definert i kompendiet for emnet. Fokuset er prediksjon av fremtidig lagervolum basert på historiske tidsseriedata, med anvendelse i operativ planlegging.
 
 ### Bedrift (valgfritt)
 
-Prosjektet gjennomføres enten i samarbeid med relevant aktør innen sjømatnæringen (avklares i initieringsfasen), eller som et generisk case basert på realistiske datasett.
+Prosjektet gjennomføres enten i samarbeid med relevant virksomhet (dersom tilgjengelig), eller som et generisk case basert på åpne eller simulerte datasett.
 
 ### Problemstilling
 
-I hvilken grad kan en maskinlæringsbasert prognosemodell redusere prognosefeil ved estimering av fremtidig lager- og/eller produksjonsvolum sammenlignet med en enkel referansemodell, og dermed bidra til mer presis operativ planlegging?
+I hvilken grad kan en maskinlæringsbasert prognosemodell redusere prognosefeil ved estimering av fremtidig lagervolum, sammenlignet med en enkel referansemodell, og dermed bidra til mer presis operativ planlegging?
 
 Problemstillingen er kvantitativ og innebærer:
 
-- Utvikling av én maskinlæringsmodell
+- Utvikling av én maskinlæringsmodell for prediksjon av lagervolum
 - Utvikling av én enkel referansemodell
-- Sammenligning av prognosepresisjon
-- Analyse av operativ betydning av forbedret prognose
+- Sammenligning av prognosepresisjon ved bruk av standard feilmål
+- Analyse av operativ betydning av forbedret prognosepresisjon
 
 ### Data
 
-Prosjektet vil benytte historiske tidsseriedata knyttet til etterspørsel, lagerbeholdning eller produksjonsvolum.
+Prosjektet vil benytte historiske tidsseriedata knyttet til lagervolum.
 
 Datagrunnlaget forventes å bestå av:
 
@@ -56,7 +56,7 @@ Prosjektet omfatter:
 
 - Én maskinlæringsmodell
 - Én referansemodell
-- Én type volum (lager eller produksjon)
+- Én type volum (lagervolum)
 
 Prosjektet omfatter ikke:
 
@@ -75,4 +75,4 @@ Prosjektet forventes å bidra med:
 1. En strukturert implementering av maskinlæringsbasert prognosemodell i logistisk kontekst
 2. Dokumentert sammenligning mot tradisjonell referansemodell
 3. Analyse av hvordan forbedret prognosepresisjon kan påvirke operativ planlegging
-4. Refleksjon rundt potensielle bærekraftseffekter gjennom redusert overproduksjon og svinn
+4. Refleksjon rundt potensielle bærekraftseffekter gjennom redusert overbeholdning og svinn
