@@ -100,6 +100,9 @@ En forbedring anses som relevant dersom den er:
 
 - Statistisk signifikant (der det er mulig å teste)
 - Praktisk meningsfull i logistisk kontekst
+
+---
+
 ## 3. Datakrav og struktur
 
 ### 3.1 Datatype
@@ -290,6 +293,8 @@ Fase 4 kan ikke starte uten ferdig databehandling. Fase 5 krever komplette progn
 
 ### 5.4 WBS (Work Breakdown Structure)
 
+WBS-en viser prosjektets hovedaktiviteter og underaktiviteter, og danner grunnlag for Gantt-diagrammet og fremdriftsstyringen.
+
 ```
 LOG650 Forskningsprosjekt
 │
@@ -448,7 +453,7 @@ Siden prosjektet er individuelt, erstattes ekstern peer-review med strukturert e
 
 ## 9. Risikoanalyse
 
-### 6.1 Risikoidentifikasjon og vurdering
+### 9.1 Risikoidentifikasjon og vurdering
 
 | ID | Risiko | Sannsynlighet | Konsekvens | Risikoscore |
 |----|--------|--------------|------------|-------------|
@@ -463,7 +468,7 @@ Siden prosjektet er individuelt, erstattes ekstern peer-review med strukturert e
 
 ---
 
-### 6.2 Risikorespons
+### 9.2 Risikorespons
 
 **R1 – Manglende bedriftsdata**
 - Tiltak: Prosjektet planlegger fra start for simulerte eller åpne datasett som fallback.
@@ -493,7 +498,7 @@ Siden prosjektet er individuelt, erstattes ekstern peer-review med strukturert e
 
 ---
 
-### 6.3 Oppsummering av kritiske risikofaktorer
+### 9.3 Oppsummering av kritiske risikofaktorer
 
 De to høyest prioriterte risikoene er:
 
