@@ -1,5 +1,30 @@
 # FASE 2 – PLANLEGGING
 
+## 0. Sammendrag fra proposal
+
+### Prosjekt
+
+**Emne:** LOG650 – Forskningsprosjekt: Logistikk og kunstig intelligens
+**Student:** Kim-Ove Hagerup
+**Område:** Etterspørselsprognoser innen kvantitativ logistikk
+
+### Problemstilling
+
+> I hvilken grad kan en maskinlæringsbasert prognosemodell redusere prognosefeil ved estimering av fremtidig lagervolum, sammenlignet med en enkel referansemodell, og dermed bidra til mer presis operativ planlegging?
+
+### Kjerneinnhold
+
+- Én maskinlæringsmodell og én referansemodell utvikles og sammenlignes
+- Datagrunnlag: historiske tidsseriedata for lagervolum (ukentlig/månedlig, min. 2–3 år)
+- Feilmål: MAE og RMSE som primære evalueringsmetrikker
+- Forventet bidrag: dokumentert sammenligning av prognosemodeller og analyse av operativ implikasjon
+
+### Avgrensninger fra proposal
+
+Prosjektet omfatter **ikke** full forsyningskjedeoptimering, nettverksdesign, klimaregnskap eller simulering av hele systemet. Fokuset er metodisk sammenligning av to prognosemodeller.
+
+---
+
 ## 1. Forskningsdesign
 
 Prosjektet gjennomføres som en kvantitativ studie basert på historiske tidsseriedata for lagervolum. Formålet er å undersøke om en maskinlæringsbasert prognosemodell kan redusere prognosefeil sammenlignet med en enkel referansemodell.
@@ -206,7 +231,7 @@ Løsningen skal **ikke**:
 
 ### 5.1 Faser og milepæler
 
-Prosjektet er strukturert i fem faser. Nåværende dato er 2026-03-26.
+Prosjektet er strukturert i seks faser. Nåværende dato er 2026-03-26.
 
 | Fase | Aktivitet | Periode | Leveranse |
 |------|-----------|---------|-----------|
@@ -263,7 +288,165 @@ Fase 4 kan ikke starte uten ferdig databehandling. Fase 5 krever komplette progn
 
 ---
 
-## 6. Risikoanalyse
+### 5.4 WBS (Work Breakdown Structure)
+
+```
+LOG650 Forskningsprosjekt
+│
+├── 1. Prosjektledelse
+│   ├── 1.1 Planlegging og oppfølging
+│   ├── 1.2 Veiledermøter og kommunikasjon
+│   └── 1.3 Versjonskontroll (GitHub)
+│
+├── 2. Data
+│   ├── 2.1 Identifisering og innhenting av datasett
+│   ├── 2.2 Utforskende dataanalyse (EDA)
+│   ├── 2.3 Databehandling og rensing
+│   └── 2.4 Feature engineering
+│
+├── 3. Modellutvikling
+│   ├── 3.1 Referansemodell
+│   │   ├── 3.1.1 Implementering
+│   │   └── 3.1.2 Prognose på testsett
+│   └── 3.2 Maskinlæringsmodell
+│       ├── 3.2.1 Implementering
+│       ├── 3.2.2 Trening og validering
+│       └── 3.2.3 Prognose på testsett
+│
+├── 4. Evaluering
+│   ├── 4.1 Beregning av feilmål (MAE, RMSE, MAPE)
+│   ├── 4.2 Visualisering av resultater
+│   └── 4.3 Analyse av praktisk relevans
+│
+└── 5. Rapport
+    ├── 5.1 Metodebeskrivelse
+    ├── 5.2 Resultatpresentasjon
+    ├── 5.3 Diskusjon og bærekraftsperspektiv
+    └── 5.4 Korrekturfase og innlevering
+```
+
+---
+
+## 6. Ressurser
+
+### 6.1 Personell
+
+| Rolle | Navn | Ansvar |
+|-------|------|--------|
+| Prosjektansvarlig / Forsker | Kim-Ove Hagerup | All gjennomføring, analyse og rapportering |
+
+Prosjektet gjennomføres som et individuelt arbeid. Kim-Ove Hagerup er ansvarlig for samtlige leveranser.
+
+---
+
+### 6.2 Verktøy og teknologi
+
+| Verktøy | Kategori | Bruksområde |
+|---------|----------|-------------|
+| Python | Programmeringsspråk | Databehandling, modellutvikling, evaluering |
+| Jupyter Notebook | Utviklingsmiljø | Koding, dokumentasjon og presentasjon av resultater |
+| VS Code | Editor | Kodeskriving og prosjektstruktur |
+| GitHub | Versjonskontroll | Kildekodelagring, historikk og innlevering |
+| Claude Code | AI-assistent | Kodegjennomgang, strukturhjelp og dokumentasjon |
+| ChatGPT | AI-assistent | Idéutvikling og tekstforbedring |
+| MS Project | Prosjektplanlegging | Oversikt over faser, milepæler og tidsplan |
+
+---
+
+## 7. Kommunikasjon
+
+### 7.1 Veilederkontakt
+
+Kommunikasjon med veileder foregår primært via **Microsoft Teams** og **e-post**.
+
+Møter avtales etter behov, men minimum ved følgende milepæler:
+
+- Etter godkjenning av fase 2 (plan)
+- Etter fullført databehandling (fase 3)
+- Etter ferdig evaluering (fase 5)
+
+---
+
+### 7.2 Møtestruktur
+
+**Før møte:**
+- Agenda sendes veileder minimum 24 timer i forveien
+- Relevante dokumenter eller kode vedlegges ved behov
+
+**Under møte:**
+- Fremdrift gjennomgås mot milepælsplan
+- Åpne spørsmål og metodiske avklaringer tas opp
+
+**Etter møte:**
+- Kort oppsummering av beslutninger og oppfølgingspunkter skrives og arkiveres (Teams-chat eller e-post)
+
+---
+
+### 7.3 Fremdriftsoppfølging
+
+Prosjektets fremdrift dokumenteres løpende i **GitHub**:
+
+- Commits beskriver hva som er gjort og hvorfor
+- Branches brukes ved behov for å skille arbeidsflyt
+- Ferdigstilte faser merkes med tydelig commit-melding
+
+---
+
+## 8. Kvalitetssikring
+
+### 8.1 Repliserbar kode
+
+All kode skal produsere identiske resultater ved gjenkjøring:
+
+- Tilfeldige prosesser fikseres med `random_state` / `numpy.random.seed`
+- Avhengigheter låses i `requirements.txt` eller `environment.yml`
+- Notebook kjøres fra topp til bunn uten feil før innlevering
+
+---
+
+### 8.2 Kronologisk splitt
+
+Tidsseriesplitt gjennomføres alltid kronologisk:
+
+- Treningssett: første ~80 % av observasjonene
+- Testsett: siste ~20 % (fremtidige observasjoner)
+- Ingen tilfeldig splitt eller k-fold på tidsseriedata
+- Skalering og transformasjoner fittes kun på treningssett
+
+---
+
+### 8.3 Modellkontroll
+
+Før resultater rapporteres kontrolleres:
+
+- At modellen ikke har sett testdata under trening
+- At feilmål er beregnet på testsett, ikke treningssett
+- At begge modeller evalueres under identiske betingelser
+- At prognoseresultater visualiseres og ser plausible ut
+
+---
+
+### 8.4 Tekstrevisjon
+
+Rapport og dokumentasjon gjennomgår følgende revisjonssteg:
+
+1. Egenkontroll: konsistens mellom metode, resultater og konklusjon
+2. Språklig gjennomgang: klar og presis norsk faglig skriving
+3. Referansesjekk: alle påstander er underbygget eller avgrenset
+
+---
+
+### 8.5 Peer-review (egenvurdering)
+
+Siden prosjektet er individuelt, erstattes ekstern peer-review med strukturert egenvurdering:
+
+- Gå gjennom kode og rapport som om man er sensor
+- Sjekk at problemstillingen er besvart, ikke bare beskrevet
+- Vurder om konklusjonen følger logisk av resultatene
+
+---
+
+## 9. Risikoanalyse
 
 ### 6.1 Risikoidentifikasjon og vurdering
 
