@@ -83,7 +83,7 @@ MAE gir et direkte mål på gjennomsnittlig avvik i volum.
 RMSE straffer store feil sterkere og gir innsikt i modellens stabilitet.
 MAPE vurderes dersom volumene ikke inneholder nullverdier.
 
-Primært vil MAE benyttes som hovedmetrisk for sammenligningen, mens RMSE og eventuelt MAPE brukes som supplerende mål.
+Primært vil MAE benyttes som hovedmetrikken for sammenligningen, mens RMSE og eventuelt MAPE brukes som supplerende mål.
 
 ---
 
@@ -441,7 +441,7 @@ Rapport og dokumentasjon gjennomgår følgende revisjonssteg:
 
 ---
 
-### 8.5 Peer-review (egenvurdering)
+### 8.5 Egenvurdering
 
 Siden prosjektet er individuelt, erstattes ekstern peer-review med strukturert egenvurdering:
 
