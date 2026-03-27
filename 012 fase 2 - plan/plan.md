@@ -215,7 +215,7 @@ Prosjektet gjennomføres i Python med følgende biblioteker:
 | `matplotlib` / `seaborn` | Visualisering |
 | `statsmodels` (valgfri) | Referansemodell eller diagnostikk |
 
-All kode leveres i Jupyter Notebook (.ipynb) med tilhørende forklarende tekst.
+All kode leveres som Python-script (.py) med tilhørende kommentarer. Jupyter Notebook (.ipynb) kan benyttes for presentasjon av resultater.
 
 ---
 
@@ -238,9 +238,9 @@ Prosjektet er strukturert i seks faser. Nåværende dato er 2026-03-26.
 
 | Fase | Aktivitet | Periode | Leveranse |
 |------|-----------|---------|-----------|
-| 1 | Proposal (fullført) | – | proposal.md |
+| 1 ✅ | Proposal (fullført) | – | proposal.md |
 | 2 | Planlegging (pågående) | Uke 13 | plan.md |
-| 3 | Data og forberedelse | Uke 14 | Datasett, notebook med databehandling |
+| 3 ✅ | Data generert, referansemodell og ML-modell implementert, figurer lagret (delvis fullført) | Uke 14 | Datasett, Python-scripts, figurer |
 | 4 | Implementering | Uke 15–16 | Modeller, prognoseresultater |
 | 5 | Evaluering og analyse | Uke 17 | Sammenligningstabell, visualisering |
 | 6 | Rapport og innlevering | Uke 18 | Endelig rapport |
@@ -250,6 +250,8 @@ Prosjektet er strukturert i seks faser. Nåværende dato er 2026-03-26.
 ### 5.2 Detaljert aktivitetsoversikt
 
 **Fase 3 – Data og forberedelse (Uke 14)**
+
+**Status 27.03.2026:** Datasett simulert, feature engineering fullført, referansemodell (MAE=39.17, RMSE=51.61) og Random Forest (MAE=32.80, RMSE=47.95) implementert og evaluert. Figurer lagret i src/plots/.
 
 - Identifisere og laste ned datasett (åpen kilde eller simulere)
 - Gjennomføre EDA (utforskende dataanalyse): plotte tidsserie, sjekke for hull og uteliggere
@@ -457,7 +459,7 @@ Siden prosjektet er individuelt, erstattes ekstern peer-review med strukturert e
 
 | ID | Risiko | Sannsynlighet | Konsekvens | Risikoscore |
 |----|--------|--------------|------------|-------------|
-| R1 | Tilgang til reelle bedriftsdata oppnås ikke | Høy | Lav | Middels |
+| R1 | Tilgang til reelle bedriftsdata oppnås ikke | **Håndtert** | Lav | Middels |
 | R2 | Åpent datasett mangler sesong- eller trendstruktur | Middels | Middels | Middels |
 | R3 | Maskinlæringsmodellen gir ikke bedre resultater enn referansemodellen | Middels | Middels | Middels |
 | R4 | Data leakage ved feil splittemetode | Lav | Høy | Middels |
@@ -474,6 +476,7 @@ Siden prosjektet er individuelt, erstattes ekstern peer-review med strukturert e
 - Tiltak: Prosjektet planlegger fra start for simulerte eller åpne datasett som fallback.
 - Ansvarlig: Kim-Ove Hagerup
 - Status: Håndtert – alternativ er allerede beskrevet i proposal og seksjon 3.5.
+- Notat: Simulert datasett benyttes. Risiko eliminert.
 
 **R2 – Svakt datasett**
 - Tiltak: Gjennomføre EDA tidlig i fase 3. Velg datasett med dokumentert sesongstruktur (f.eks. M5-competition, Kaggle Store Sales).
