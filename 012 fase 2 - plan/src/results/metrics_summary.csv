@@ -1,0 +1,3 @@
+model,MAE,RMSE
+Baseline,39.17,51.61
+Random Forest,32.8,47.95
