@@ -20,7 +20,7 @@ Studien følger et komparativt forskningsdesign der en sesongnaiv referansemodel
 
 Resultatene viser at Random Forest-modellen reduserer MAE med omtrent 29 % og RMSE med omtrent 26 % sammenlignet med den sesongnaive referansemodellen. Forbedringen er størst i delen av testperioden hvor virksomheten påvirkes av nyåpningen av gårdscaféen, og minst i uker som ligner historiske mønstre. Permutasjonsbasert variabelviktighet identifiserer eventindikatorer og året-før-besøk som de viktigste forklaringsvariablene. Begge modeller undervurderer det faktiske besøksvolumet i testperioden, noe som henger sammen med at de strukturelle skiftene i datasettet introduserer et nytt aktivitetsnivå som ingen av modellene har sett under trening.
 
-Studien konkluderer med at en maskinlæringsmodell kan gi en operativt meningsfull forbedring i prognosepresisjon for en gårdsvirksomhet i vekst, men at gevinsten avhenger av at strukturelle endringer fanges opp gjennom eksplisitte forklaringsvariabler. Funnene må tolkes med forbehold om at datagrunnlaget er simulert.
+Studien konkluderer med at en maskinlæringsmodell kan gi en operativt meningsfull forbedring i prognosepresisjon for en gårdsvirksomhet i vekst, men at gevinsten avhenger av at strukturelle endringer fanges opp gjennom eksplisitte forklaringsvariabler. Funnene må tolkes med forbehold om at datagrunnlaget er simulert. I emnets kompendium (Pettersen & Rekdal, 2026) plasseres studien under område 1 — *Etterspørselsprognoser* — og spesifikt under problemstilling 3 — *Mange forklaringsvariabler* — der Random Forest er eksplisitt nevnt som anbefalt modellfamilie.
 
 ---
 
@@ -79,27 +79,41 @@ Kapittel 2 etablerer det teoretiske rammeverket og setter studien i kontekst av 
 
 ## 2. Teoretisk rammeverk og litteratur
 
-### 2.1 Etterspørselsprognoser i logistikk
+### 2.1 Etterspørselsprognoser i logistikk og pensumets rammeverk
 
-Prognoser danner grunnlaget for operative og taktiske beslutninger i logistikk, blant annet for produksjonsplanlegging, lagerstyring, bemanning og distribusjon (Chopra & Meindl, 2019). For virksomheter med utpreget sesongvariasjon, slik som reiseliv, opplevelser og direktesalg fra gård, er ukentlig oppløsning vanlig fordi den balanserer detaljnivå mot støy i datagrunnlaget (Hyndman & Athanasopoulos, 2021).
+Prognoser danner grunnlaget for operative og taktiske beslutninger i logistikk, blant annet for produksjonsplanlegging, lagerstyring, bemanning og distribusjon. For virksomheter med utpreget sesongvariasjon, slik som reiseliv, opplevelser og direktesalg fra gård, er ukentlig oppløsning vanlig fordi den balanserer detaljnivå mot støy i datagrunnlaget (Hyndman & Athanasopoulos, 2021).
 
-Et sentralt skille går mellom *enkle statistiske benchmarks* (sesongnaiv, Holt-Winters, ARIMA-familien) og *maskinlæringsmodeller* (regresjonstrær, gradient boosting, nevrale nettverk). Hyndman og Athanasopoulos (2021) understreker at sesongnaive metoder er svært vanskelige å slå når dataserien er kort eller sterkt sesongstyrt, og at de derfor egner seg godt som referansepunkt for å vurdere mer komplekse modeller.
+I emnets kompendium plasserer Pettersen og Rekdal (2026) etterspørselsprognoser som *område 1* og strukturerer fagfeltet rundt fem begreper: område, problemstilling, modell, prosess og metode. For etterspørselsprognoser identifiseres fem sentrale problemstillinger med tilhørende modellfamilier. Tabell 2.1 viser denne strukturen og hvor denne studien plasseres.
+
+**Tabell 2.1. Pensumets fem problemstillinger for etterspørselsprognoser.**
+
+| Nr. | Problemstilling          | Anbefalte modeller                  | Plassering for denne studien |
+|-----|--------------------------|-------------------------------------|------------------------------|
+| 1   | Trend og sesong          | ETS, ARIMA, SARIMA                  | Behandlet som referansemodell |
+| 2   | Eksterne faktorer og kampanjer | ARIMAX, Prophet               |                              |
+| 3   | **Mange forklaringsvariabler** | **Random Forest, XGBoost, LightGBM** | **Hovedmodell**         |
+| 4   | Sporadisk etterspørsel   | Croston, SBA                        |                              |
+| 5   | Komplekse sekvenser      | LSTM, Transformer                   |                              |
+
+Studien tilhører dermed problemstilling 3 i pensumets rammeverk, der Random Forest eksplisitt nevnes som anbefalt modellfamilie sammen med XGBoost og LightGBM (Pettersen & Rekdal, 2026).
+
+Et sentralt skille i fagfeltet går mellom *enkle statistiske benchmarks* (sesongnaiv, Holt-Winters, ARIMA-familien) og *maskinlæringsmodeller* (regresjonstrær, gradient boosting, nevrale nettverk). Hyndman og Athanasopoulos (2021) understreker at sesongnaive metoder er svært vanskelige å slå når dataserien er kort eller sterkt sesongstyrt, og at de derfor egner seg godt som referansepunkt for å vurdere mer komplekse modeller. Pensum anbefaler Box-Jenkins-metoden som standard prosess for tidsseriemodellering (Pettersen & Rekdal, 2026); for ML-baserte modeller følges i stedet en ML-pipeline med feature engineering, kronologisk splitt og kryssvalidering, som anvendt i denne studien.
 
 ### 2.2 Maskinlæring versus enkle benchmarks
 
 Spørsmålet om maskinlæringsmodeller faktisk overgår enkle statistiske benchmarks har vært et hovedtema i de etterhvert mange M-konkurransene. M4-konkurransen, som omfattet 100 000 tidsserier på ulike frekvenser, viste at rene maskinlæringsmodeller stort sett gjorde det dårligere enn statistiske benchmarks, mens hybride modeller som kombinerte begge tilnærminger lå i toppsjiktet (Makridakis, Spiliotis & Assimakopoulos, 2020). I M5-konkurransen, som fokuserte på hierarkisk detaljhandelsetterspørsel, viste seg gradient boosting (LightGBM) å være den klart sterkeste familien av modeller (Makridakis, Spiliotis & Assimakopoulos, 2022). Disse funnene tilsier at maskinlæringens potensial er størst når datasettet har mange relevante forklaringsvariabler, mens enkle benchmarks holder seg konkurransedyktige på rene univariate tidsserier med begrenset historikk.
 
-For mindre virksomheter med kortere serier finner Bandara, Bergmeir og Smyl (2020) at globale læringsmodeller (dvs. modeller som lærer på tvers av flere serier) kan gi tydelig forbedring over univariate benchmarks, mens lokale ML-modeller på en enkelt kort serie ofte gir marginale eller negative gevinster. Spiliotis og medforfattere (2021) finner i en sammenligning av ML- og statistiske metoder for detaljhandelsetterspørsel at relativ ytelse avhenger sterkt av strukturen i etterspørselen, særlig graden av sesongvariasjon og forekomsten av strukturelle skift.
+Pensumets eksempler i kapittel 1 illustrerer dette mønsteret konkret. SARIMA brukes der på månedlig traktorsalg fra produsenten PowerHorse over en 12-årsperiode med tydelig trend og sesong, og fanger sesongstrukturen og produksjonsbølgene over et helt år godt (Pettersen & Rekdal, 2026, kap. 1.3). I et andre eksempel utvider pensumet modellen til ARIMAX for å håndtere kampanjeløft i en dagligvarekjede — en utvidelse som reduserer prognosefeilen med over 70 prosent fordi kampanjene er kjente, planlagte intervensjoner som ikke ligger i historikken alene (kap. 1.4). Mannsverk-casen i denne studien er strukturelt sammenlignbar: gården har en tydelig årlig sesong (sommer-topp), men også konkrete eksogene intervensjoner i form av åpning av gårdsbutikk og gårdscafé, samt planlagte event-uker. Det samme prinsippet gjelder dermed for Random Forest i denne studien som for ARIMAX i pensumets eksempel: gevinsten over sesongnaiv referansemodell drives av at de eksogene forklaringsvariablene (kalender, helligdager, event, og strukturelle skift) fanger informasjon som ren historikk ikke gir.
 
 ### 2.3 Random Forest som regresjonsmodell
 
-Random Forest (Breiman, 2001) er en ensemblemetode som kombinerer mange beslutningstrær trent på bootstrap-utvalg av treningsdata, med tilfeldig utvelgelse av forklaringsvariabler i hvert splitt. Modellen er populær i prognoselitteraturen fordi den fanger opp ikke-lineære sammenhenger og interaksjoner uten manuell spesifisering, og fordi den er relativt robust mot overtilpasning sammenlignet med enkelttrær. Hastie, Tibshirani og Friedman (2009) påpeker at Random Forest sjelden er den absolutt beste modellen på et gitt problem, men at den ofte ligger nær toppen og er enkel å sette opp riktig. For tidsseriedata krever modellen at temporale strukturer (sesong, lag, trend) representeres som eksplisitte forklaringsvariabler, ettersom modellen ikke selv har en innebygd tidsforståelse.
+Random Forest (Breiman, 2001) er en ensemblemetode som kombinerer mange beslutningstrær trent på bootstrap-utvalg av treningsdata, med tilfeldig utvelgelse av forklaringsvariabler i hvert splitt. Modellen er populær i prognoselitteraturen fordi den fanger opp ikke-lineære sammenhenger og interaksjoner uten manuell spesifisering, og fordi den er relativt robust mot overtilpasning sammenlignet med enkelttrær. Pensum (Pettersen & Rekdal, 2026) klassifiserer Random Forest sammen med XGBoost og LightGBM under metodefamilien gradient boosting og ensemble-trær. For tidsseriedata krever modellen at temporale strukturer (sesong, lag, trend) representeres som eksplisitte forklaringsvariabler, ettersom modellen ikke selv har en innebygd tidsforståelse.
 
 Valg av Random Forest framfor gradient boosting i denne studien er basert på enklere hyperparameterisering og lavere risiko for overtilpasning på et kort datasett. Diskusjonen i kapittel 7 vurderer hvordan dette valget kan ha påvirket resultatene.
 
 ### 2.4 Strukturelle skift og prognosenøyaktighet
 
-Strukturelle skift — varige endringer i nivå eller varians i tidsserien — er en kjent utfordring for prognosemodeller. Pesaran og Timmermann (2007) viser at modeller som ikke eksplisitt håndterer slike skift gir systematisk skjeve prognoser i perioder etter skiftet. I prognoselitteraturen håndteres dette typisk med indikator-variabler (dummy-variabler) eller ved å trekke ut nivåskiftet før prognosen lages. For Mannsverk Gård er åpningen av gårdsbutikk og gårdscafé klassiske strukturelle skift, og rapportens modelloppsett inkluderer slike indikatorer eksplisitt.
+Strukturelle skift — varige endringer i nivå eller varians i tidsserien — er en kjent utfordring for prognosemodeller. Modeller som ikke eksplisitt håndterer slike skift gir systematisk skjeve prognoser i perioder etter skiftet. I prognoselitteraturen håndteres dette typisk med indikator-variabler (dummy-variabler) eller ved å trekke ut nivåskiftet før prognosen lages. For Mannsverk Gård er åpningen av gårdsbutikk og gårdscafé klassiske strukturelle skift, og rapportens modelloppsett inkluderer slike indikatorer eksplisitt. Pensum diskuterer tilsvarende strukturelle hendelser i forbindelse med kampanjer og eksogene faktorer (Pettersen & Rekdal, 2026, kap. 1.4).
 
 ### 2.5 Evalueringsmål
 
@@ -139,7 +153,7 @@ Studien gjennomføres som et komparativt kvantitativt design. To prognosemodelle
 
 Reelle ukentlige besøksdata fra Mannsverk Gård er ikke tilgjengelig i strukturert form for hele studieperioden. Gården har frem til 2024 hatt et lite, varierende kundegrunnlag uten systematisk registrering, og digital kassesystemdata fra gårdsbutikken eksisterer først fra åpningen i november 2024. Et simulert datagrunnlag som speiler kjente strukturelle hendelser ved gården og typiske mønstre i norsk gårdsturisme er derfor vurdert som det mest realistiske kompromisset innenfor prosjektets rammer.
 
-Bruk av simulerte data er metodisk akseptabelt i logistikk- og prognoseforskning forutsatt at simuleringen er eksplisitt dokumentert og at konklusjoner formuleres med passende forbehold (Robinson, 2014). Datasettet i denne studien er ikke ment å gi presise tall for faktisk besøk ved gården, men å gi et realistisk og kontrollerbart underlag for modellsammenligning.
+Bruk av simulerte data er metodisk akseptabelt i logistikk- og prognoseforskning forutsatt at simuleringen er eksplisitt dokumentert med fast frøverdi og dokumenterte parametere, og at konklusjoner formuleres med passende forbehold. Pensum diskuterer simulering som verktøy både for prognosearbeid og for å teste robusthet i forsyningskjeder (Pettersen & Rekdal, 2026, kap. 5 og 11). Datasettet i denne studien er ikke ment å gi presise tall for faktisk besøk ved gården, men å gi et realistisk og kontrollerbart underlag for modellsammenligning.
 
 ### 4.3 Datasettets struktur
 
@@ -222,7 +236,7 @@ Det vil si at prognosen for en uke er lik observert besøk samme uke året før.
 
 ### 5.3 Random Forest
 
-Random Forest-modellen er definert som et ensemble av regresjonstrær trent på bootstrap-utvalg av treningsdataene, med tilfeldig utvelgelse av forklaringsvariabler i hver splitt. Implementasjonen i `scikit-learn` brukes med følgende hyperparametere:
+Random Forest-modellen er definert som et ensemble av regresjonstrær trent på bootstrap-utvalg av treningsdataene, med tilfeldig utvelgelse av forklaringsvariabler i hver splitt. Implementasjonen i `scikit-learn` (Pedregosa et al., 2011) brukes med følgende hyperparametere:
 
 **Tabell 5.1. Hyperparametere for Random Forest.**
 
@@ -254,13 +268,13 @@ Figur 6.1 viser hele det simulerte datasettet over perioden 2022–2025. Den und
 
 ![Figur 6.1: Ukentlige besøkstall ved Mannsverk Gård (simulert, 2022–2025)](figures/01_dataset_overview.png)
 
-**Figur 6.1.** Ukentlig antall besøkende fra 2022 til 2025. Sesongstrukturen og de to strukturelle skiftene er klart synlige i serien.
+**Figur 6.1.** Ukentlig antall besøkende fra 2022 til 2025. Den blå linjen viser hele det simulerte datasettet (209 ukentlige observasjoner). Den årlige sesongstrukturen vises som regelmessige svingninger med sommer-topper i juli. De to vertikale stiplede linjene markerer henholdsvis åpning av gårdsbutikk 1. november 2024 (rød) og åpning av gårdscafé 1. juni 2025 (grønn). Etter caféåpningen ligger besøksnivået strukturelt høyere enn i hele treningsperioden, noe som er den sentrale utfordringen for modellene i denne studien.
 
 Figur 6.2 viser gjennomsnittlig besøk per ISO-uke aggregert over hele perioden. Profilen er typisk for nordnorsk sommer-drevet reiseliv: et lavt vinternivå (uker 1–10, gjennomsnitt rundt 25), en gradvis oppgang mot midtsommer (topp i uker 27–29 med rundt 115 besøk per uke), og en avtakende høst med en liten sekundær topp i romjul.
 
 ![Figur 6.2: Gjennomsnittlig besøk per ISO-uke](figures/02_seasonal_profile.png)
 
-**Figur 6.2.** Gjennomsnittlig ukentlig besøk per ISO-uke for hele perioden 2022–2025.
+**Figur 6.2.** Gjennomsnittlig ukentlig besøk per ISO-uke aggregert over hele perioden 2022–2025. Profilen viser et lavt vinternivå på rundt 25 besøk i ukene 1–10, en gradvis oppgang gjennom våren og forsommeren, en tydelig sommer-topp i ukene 27–29 (midtsommer) med rundt 115 besøk, en avtakende høst, og en mindre sekundærtopp i romjul (ukene 51–52). Profilen er typisk for nordnorsk sommer-drevet reiseliv.
 
 ### 6.2 Prognosefeil for de to modellene
 
@@ -284,7 +298,7 @@ Figur 6.3 viser de to modellenes prediksjoner over testperioden sammen med fakti
 
 ![Figur 6.3: Modellprediksjoner mot faktiske besøkstall (testperiode)](figures/03_predictions.png)
 
-**Figur 6.3.** Faktisk besøk (svart) og prediksjoner fra sesongnaiv (rød stiplet) og Random Forest (grønn) gjennom hele testperioden.
+**Figur 6.3.** Faktisk besøk (svart) og prediksjoner fra sesongnaiv referansemodell (rød stiplet) og Random Forest (grønn) gjennom hele testperioden (32 uker, andre halvår 2025). Begge modellene undervurderer det faktiske nivået gjennom hele testperioden fordi treningsdataene i hovedsak speiler et lavere driftsnivå før gårdscaféens åpning. Random Forest ligger likevel systematisk nærmere de faktiske verdiene enn sesongnaiv, særlig fra august 2025 og utover. Avstanden mellom svart linje og hver av prediksjonslinjene tilsvarer direkte den modellfeilen som oppsummeres i tabell 6.1 (MAE = 93,22 for sesongnaiv, 66,16 for Random Forest).
 
 ### 6.4 Residualanalyse
 
@@ -292,7 +306,7 @@ Figur 6.4 viser residualene over tid (venstre) og fordelingen av residualene (h�
 
 ![Figur 6.4: Residualanalyse](figures/04_residuals.png)
 
-**Figur 6.4.** Residualer over tid (venstre) og residualfordeling (høyre) for begge modeller. Positive residualer indikerer at modellen undervurderer faktisk besøk.
+**Figur 6.4.** Residualer (faktisk besøk minus prediksjon) over tid (venstre panel) og fordeling av residualer (høyre panel) for de to modellene. Positive residualer indikerer at modellen undervurderer faktisk besøk. Begge modellers residualer er overveiende positive gjennom hele testperioden, men sesongnaiv (rød) har systematisk høyere residualer enn Random Forest (grønn). I fordelingen til høyre er Random Forests residualer forskjøvet nærmere null, mens sesongnaivs distribusjon klumper seg i området 80–120 besøkende. Random Forest har dermed klart lavere systematisk skjevhet på dette datasettet.
 
 Den systematiske underprediksjonen reflekterer at testperioden ligger etter caféåpningen, slik at det reelle besøksnivået er høyere enn det modellene har sett under trening. Sesongnaiv har ingen mekanisme for å justere for dette skiftet og bommer derfor mest. Random Forest fanger opp deler av skiftet via `cafe_open`-indikatoren og `lag_52`, og bommer derfor mindre.
 
@@ -302,7 +316,7 @@ Figur 6.5 viser permutasjonsbasert variabelviktighet for Random Forest, beregnet
 
 ![Figur 6.5: Permutasjonsbasert variabelviktighet for Random Forest](figures/05_feature_importance.png)
 
-**Figur 6.5.** Permutasjonsbasert variabelviktighet beregnet på testsettet (20 permutasjoner per variabel).
+**Figur 6.5.** Permutasjonsbasert variabelviktighet for Random Forest, beregnet ved å stokke om hver variabel 20 ganger i testsettet og måle gjennomsnittlig reduksjon i R². Lengre stolper indikerer at variabelen bidrar mer til prediksjonen. To variabler skiller seg ut: `is_event` (eventindikator) og `lag_52` (besøk samme uke året før). Strukturelle skift-indikatorene `shop_open` og `cafe_open` har null viktighet i denne testen fordi de er konstant lik 1 gjennom hele testperioden — dette er et metodisk artefakt, ikke en konklusjon om at variablene er ubrukelige (se kap. 7.2 for diskusjon).
 
 ---
 
@@ -312,7 +326,7 @@ Figur 6.5 viser permutasjonsbasert variabelviktighet for Random Forest, beregnet
 
 Resultatene viser at en moderat kompleks maskinlæringsmodell kan redusere prognosefeilen ved estimering av ukentlig besøk ved Mannsverk Gård med omtrent 29 prosent målt på MAE, sammenlignet med en sesongnaiv referansemodell. Forbedringen er konsistent på tvers av begge feilmål og er av en størrelsesorden som er operativt meningsfull. Med en gjennomsnittlig forskjell på rundt 27 besøkende per uke kan korrekt nivåsetting ha direkte konsekvenser for bemanningsplaner, råvarebestilling og forventet matsvinn.
 
-Funnene er konsistente med Spiliotis og medforfattere (2021), som peker på at maskinlæringsmodellers fortrinn øker når dataserien inneholder forklaringsvariabler utover ren historikk og strukturelle skift som benchmarkmodellene ikke kan håndtere. I denne studien er det nettopp slike skift som driver forskjellen mellom de to modellene: sesongnaiv har ingen mekanisme for å lære at besøksvolumet er strukturelt høyere etter caféåpningen, mens Random Forest lærer dette via sin tilgang til `cafe_open`- og `shop_open`-indikatorene.
+Funnene er konsistente med M4-konkurransens hovedfunn om at maskinlæring sjelden slår enkle statistiske benchmarks på rent univariate serier, men gir tydelig forbedring når serien inneholder eksogene forklaringsvariabler og strukturelle skift som benchmarkmodellene ikke kan håndtere (Makridakis, Spiliotis & Assimakopoulos, 2020). I denne studien er det nettopp slike skift som driver forskjellen mellom de to modellene: sesongnaiv har ingen mekanisme for å lære at besøksvolumet er strukturelt høyere etter caféåpningen, mens Random Forest lærer dette via sin tilgang til `cafe_open`- og `shop_open`-indikatorene.
 
 ### 7.2 Hva variabelviktigheten avslører
 
@@ -336,7 +350,7 @@ For Mannsverk Gård kan resultatene konkretiseres i tre operative anbefalinger:
 
 ### 7.5 Teoretiske implikasjoner
 
-Studien føyer seg inn i en bredere litteratur som finner at maskinlæring gir betydelig gevinst over enkle benchmarks når serien inneholder relevante eksogene forklaringsvariabler og strukturelle skift (Spiliotis m.fl., 2021; Bandara m.fl., 2020), og mer marginal gevinst når serien er rent univariat og uten skift (Makridakis m.fl., 2020). For småskala virksomheter i tidlig vekstfase peker resultatene mot at det er strukturelle indikatorer og kalendervariabler, snarere enn algoritmevalg i seg selv, som driver prognosegevinsten.
+Studien føyer seg inn i en bredere litteratur som finner at maskinlæring gir betydelig gevinst over enkle benchmarks når serien inneholder relevante eksogene forklaringsvariabler og strukturelle skift, og mer marginal gevinst når serien er rent univariat og uten skift (Makridakis m.fl., 2020; Makridakis m.fl., 2022). For småskala virksomheter i tidlig vekstfase peker resultatene mot at det er strukturelle indikatorer og kalendervariabler, snarere enn algoritmevalg i seg selv, som driver prognosegevinsten. Dette samsvarer med pensumets prinsipp om at modellvalg skal styres av problemstillingens egenskaper og datatilgang, ikke av algoritmens kompleksitet i seg selv (Pettersen & Rekdal, 2026).
 
 ---
 
@@ -356,14 +370,16 @@ Studien har følgende sentrale begrensninger som må tas med i tolkningen av res
 
 Problemstillingen som stilles i denne rapporten er om en maskinlæringsbasert prognosemodell kan redusere prognosefeil ved estimering av ukentlig besøksvolum ved Mannsverk Gård sammenlignet med en enkel referansemodell, og dermed bidra til mer presis operativ planlegging.
 
-Resultatene viser at en Random Forest-modell trent på trettne forklaringsvariabler (kalender, sesong, lag, helligdager, events og strukturelle skift) reduserer MAE fra 93,22 til 66,16 og RMSE fra 96,10 til 70,93 på et testsett av 32 uker i andre halvår 2025. Dette tilsvarer en MAE-reduksjon på 29 prosent og en RMSE-reduksjon på 26 prosent. Forbedringen er operativt meningsfull og konsistent på tvers av begge feilmål.
+**Svaret er ja.** En Random Forest-modell trent på tretten forklaringsvariabler (kalender, sesong, lag, helligdager, events og strukturelle skift) reduserer MAE fra 93,22 til 66,16 og RMSE fra 96,10 til 70,93 på et testsett av 32 uker i andre halvår 2025. Dette tilsvarer en MAE-reduksjon på 29 prosent og en RMSE-reduksjon på 26 prosent. Forbedringen er operativt meningsfull og konsistent på tvers av begge feilmål, og oversettes til en gjennomsnittlig forskjell på rundt 27 besøkende per uke — en størrelsesorden som har direkte verdi for bemanning, råvareinnkjøp og kapasitetsplanlegging.
 
-Studiens to konkrete bidrag er:
+Studien gir to konkrete bidrag:
 
-1. **Empirisk:** Rapporten dokumenterer at en enkel maskinlæringsmodell på et realistisk simulert datasett for en gårdsvirksomhet i strukturell vekst gir en prognoseforbedring i størrelsesorden 25–30 prosent over en sesongnaiv referanse. Forbedringen tilsvarer en gjennomsnittlig forskjell på rundt 27 besøkende per uke, som har direkte verdi for bemanning og råvareinnkjøp.
-2. **Metodisk:** Variabelviktighetsanalysen viser at gevinsten primært drives av eksplisitte event- og kalendervariabler kombinert med sesongtypiske lag-variabler, og ikke av algoritmevalg i seg selv. Dette taler for at investering i god datafangst og strukturert hendelseskalender vil ha større prognoseeffekt enn ytterligere modellsofistikering på dette stadiet.
+1. **Empirisk bidrag:** Rapporten dokumenterer at en moderat kompleks maskinlæringsmodell på et realistisk simulert datasett for en gårdsvirksomhet i strukturell vekst gir en prognoseforbedring i størrelsesorden 25–30 prosent over en sesongnaiv referanse, når strukturelle skift inkluderes som eksplisitte forklaringsvariabler.
+2. **Metodisk bidrag:** Variabelviktighetsanalysen viser at gevinsten primært drives av eksplisitte event- og kalendervariabler kombinert med sesongtypiske lag-variabler, og ikke av algoritmevalg i seg selv. Dette innebærer at investering i god datafangst og strukturert hendelseskalender vil ha større prognoseeffekt for Mannsverk Gård enn ytterligere modellsofistikering på det nåværende stadiet.
 
-Forslag til videre arbeid omfatter (i) replisering på reelle besøksdata når kassesystem og hendelseskalender ved gården har akkumulert tilstrekkelig historikk, (ii) sammenligning mot gradient boosting (XGBoost eller LightGBM), (iii) utvidelse til SARIMA og eksponentiell glatting som alternative benchmark-modeller, og (iv) modellering av usikkerhet via prognoseintervaller.
+Konklusjonen må leses i lys av studiens viktigste begrensning — at datagrunnlaget er simulert. Funnene er derfor retningsgivende snarere enn endelige, og bør verifiseres på reelle data så snart kassesystem og hendelseskalender ved gården har akkumulert tilstrekkelig historikk.
+
+Forslag til videre arbeid omfatter (i) replisering på reelle besøksdata, (ii) sammenligning mot gradient boosting (XGBoost eller LightGBM), som pensumet trekker fram som potensielt sterkere ML-alternativ, (iii) utvidelse til SARIMA og ARIMAX som alternative benchmark-modeller i tråd med pensumets behandling av prognose-området, og (iv) modellering av usikkerhet via prognoseintervaller.
 
 ---
 
@@ -381,13 +397,7 @@ Bruken av KI har vært i samsvar med Høgskolen i Moldes retningslinjer for emne
 
 ## 11. Referanseliste
 
-Bandara, K., Bergmeir, C., & Smyl, S. (2020). Forecasting across time series databases using recurrent neural networks on groups of similar series: A clustering approach. *Expert Systems with Applications, 140*, 112896. https://doi.org/10.1016/j.eswa.2019.112896
-
 Breiman, L. (2001). Random forests. *Machine Learning, 45*(1), 5–32. https://doi.org/10.1023/A:1010933404324
-
-Chopra, S., & Meindl, P. (2019). *Supply chain management: Strategy, planning, and operation* (7. utg.). Pearson.
-
-Hastie, T., Tibshirani, R., & Friedman, J. (2009). *The elements of statistical learning: Data mining, inference, and prediction* (2. utg.). Springer.
 
 Hyndman, R. J., & Athanasopoulos, G. (2021). *Forecasting: Principles and practice* (3. utg.). OTexts. https://otexts.com/fpp3/
 
@@ -397,13 +407,9 @@ Makridakis, S., Spiliotis, E., & Assimakopoulos, V. (2020). The M4 Competition: 
 
 Makridakis, S., Spiliotis, E., & Assimakopoulos, V. (2022). M5 accuracy competition: Results, findings, and conclusions. *International Journal of Forecasting, 38*(4), 1346–1364. https://doi.org/10.1016/j.ijforecast.2021.11.013
 
-Pesaran, M. H., & Timmermann, A. (2007). Selection of estimation window in the presence of breaks. *Journal of Econometrics, 137*(1), 134–161. https://doi.org/10.1016/j.jeconom.2006.03.010
-
 Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., Vanderplas, J., Passos, A., Cournapeau, D., Brucher, M., Perrot, M., & Duchesnay, E. (2011). Scikit-learn: Machine learning in Python. *Journal of Machine Learning Research, 12*, 2825–2830.
 
-Robinson, S. (2014). *Simulation: The practice of model development and use* (2. utg.). Palgrave Macmillan.
-
-Spiliotis, E., Makridakis, S., Semenoglou, A.-A., & Assimakopoulos, V. (2021). Comparison of statistical and machine learning methods for daily SKU demand forecasting. *Operational Research, 22*(3), 3037–3061. https://doi.org/10.1007/s12351-020-00605-2
+Pettersen, B.-I., & Rekdal, P. K. (2026). *Kvantitative metoder i logistikk — Kompendium*. LOG650 Forskningsprosjekt: Logistikk og kunstig intelligens, Høgskolen i Molde. https://kml-site-production.up.railway.app/
 
 ---
 

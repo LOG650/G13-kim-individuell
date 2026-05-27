@@ -1,0 +1,23 @@
+﻿REFERANSE: Hyndman & Athanasopoulos (2021)
+
+Full sitering (APA 7):
+Hyndman, R. J., & Athanasopoulos, G. (2021). Forecasting: Principles and
+practice (3. utg.). OTexts. https://otexts.com/fpp3/
+
+Type: Lærebok (online, gratis)
+Forlag: OTexts, 3. utgave 2021
+
+Hvor lese boka:
+Boka er gratis tilgjengelig som en fullstendig nettside hos forfatteren:
+
+  https://otexts.com/fpp3/
+
+Den er ikke utgitt som én sammenhengende PDF. Hvert kapittel er en egen
+HTML-side som kan skrives ut som PDF via nettleseren (Ctrl+P -> "Lagre som PDF").
+
+Hvilke kapitler ble brukt i rapporten?
+- Kap. 5 (sesongnaiv referansemodell)
+- Kap. 7 (eksponentiell glatting, som referanse til alternative metoder)
+- Kap. 5.8 (evalueringsmål, MAE/RMSE)
+
+Boka er ofte sitert som den autoritative læreboka i moderne tidsserieprognose.

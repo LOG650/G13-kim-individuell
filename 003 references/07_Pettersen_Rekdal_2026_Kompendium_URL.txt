@@ -1,0 +1,41 @@
+REFERANSE: Pettersen & Rekdal (2026)
+
+Full sitering (APA 7):
+Pettersen, B.-I., & Rekdal, P. K. (2026). Kvantitative metoder i logistikk
+— Kompendium. LOG650 Forskningsprosjekt: Logistikk og kunstig intelligens,
+Høgskolen i Molde. https://kml-site-production.up.railway.app/
+
+Type: Pensumbok / kompendium for emnet LOG650
+Forlag: Selvpublisert som online kompendium
+År: 2026
+
+Hvor lese boka:
+Pensumboka er publisert som en online nettside av forfatterne:
+
+  https://kml-site-production.up.railway.app/
+
+Boka er strukturert i:
+- Del I: Innledning (begreper, arbeidsflyt og KI, prosjektgjennomføring)
+- Del II: Områder (11 sentrale logistikkområder med 33 gjennomarbeidede
+  eksempler)
+- Vedlegg A: Python kode
+
+Hvilke kapitler ble brukt i rapporten?
+- Kap. I (Begreper): Fembegrepsstrukturen (område, problemstilling, modell,
+  prosess, metode)
+- Kap. 1 (Etterspørselsprognoser): hovedreferanse for området og
+  modellfamilien
+  * Kap. 1.2 (Problemstillinger, modeller og metoder): Tabell 2.1 i rapporten
+    er basert på den tilsvarende oversikten i pensumets kap. 1
+  * Kap. 1.3 (SARIMA, PowerHorse-traktor): nevnt som case-nært eksempel
+  * Kap. 1.4 (ARIMAX, NordMat dagligvarekjede): nevnt som case-nært eksempel
+  * Kap. 1.5 (LightGBM): refereres som videre arbeid
+- Kap. 5 (Forsyningskjedeanalyse): for simulering som metode
+- Kap. 11 (Risikostyring): for simulering som metode
+
+Hvorfor ingen PDF her?
+Pensumboka er publisert kun som online nettside, ikke som nedlastbar PDF.
+Dette er forfatternes valg og standard for online kompendier.
+
+For sensor: Boka er emnets offisielle pensum, anbefalt av faglærere
+Pettersen og Rekdal som forfattere av emnet.

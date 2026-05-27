@@ -1,4 +1,0 @@
-model,MAE,RMSE
-Sesongnaiv,93.22,96.1
-Random Forest,66.16,70.93
-Forbedring RF vs sesongnaiv (%),29.0,26.2
