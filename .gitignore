@@ -16,3 +16,8 @@ __pycache__/
 data/
 figures/
 results/
+
+# Python-output fra simulate_and_model.py
+data/
+figures/
+results/
