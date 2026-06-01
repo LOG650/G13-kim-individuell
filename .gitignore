@@ -12,3 +12,7 @@ __pycache__/
 
 # OS
 .DS_Store
+# Python-output fra simulate_and_model.py
+data/
+figures/
+results/
