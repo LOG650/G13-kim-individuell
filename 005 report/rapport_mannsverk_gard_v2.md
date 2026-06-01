@@ -415,21 +415,25 @@ Pettersen, B.-I., & Rekdal, P. K. (2026). *Kvantitative metoder i logistikk — 
 
 ## 12. Vedlegg
 
+Alle vedlegg er tilgjengelige som separate filer i prosjektets GitHub-repositorium:
+**https://github.com/LOG650/G13-kim-individuell**
+
 ### Vedlegg A — Python-script
 
-Den fullstendige Python-implementasjonen `simulate_and_model.py` følger med som egen fil. Scriptet inneholder hele pipelinen: parameterspesifisering, datagenerering, feature engineering, sesongnaiv og Random Forest, evaluering, og figurproduksjon. Kjøring krever Python 3.10+ og pakkene `pandas`, `numpy`, `scikit-learn` og `matplotlib`.
+Den fullstendige Python-implementasjonen ligger som `simulate_and_model.py` i repoets rotmappe. Scriptet inneholder hele pipelinen: parameterspesifisering, datagenerering, feature engineering, sesongnaiv og Random Forest, evaluering, og figurproduksjon. Kjøring krever Python 3.10+ og pakkene `pandas`, `numpy`, `scikit-learn` og `matplotlib` (komplett liste i `requirements.txt`).
 
-### Vedlegg B — Prosjektplan
+### Vedlegg B — Prosjektplan og Gantt
 
-`prosjektplan_mannsverk_gard_v2.docx` med detaljert Gantt-diagram `LOG650_Gantt_Mannsverk.xlsx`.
+Detaljert prosjektplan (`prosjektplan_mannsverk_gard_v2.docx`) med tilhørende Gantt-diagram (`LOG650_Gantt_Mannsverk.xlsx`) ligger i mappen `012 fase 2 - plan/` i samme repositorium.
 
 ### Vedlegg C — Reproduserbarhet
 
 For å reprodusere alle tall og figurer i rapporten:
 
-1. Installer Python 3.10 eller senere.
-2. Installer pakkene: `pip install pandas numpy scikit-learn matplotlib`.
-3. Kjør `python simulate_and_model.py` fra prosjektmappen.
-4. Resultater lagres i mappene `data/`, `figures/` og `results/`.
+1. Klon repositoriet fra https://github.com/LOG650/G13-kim-individuell
+2. Installer Python 3.10 eller senere.
+3. Installer pakkene: `pip install -r requirements.txt` (eller manuelt: `pip install pandas numpy scikit-learn matplotlib`).
+4. Kjør `python simulate_and_model.py` fra prosjektmappen.
+5. Resultater lagres i mappene `data/`, `figures/` og `results/`.
 
 Med frøverdi 42 vil samtlige numeriske resultater i rapporten reproduseres eksakt.
